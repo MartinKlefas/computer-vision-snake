@@ -1,5 +1,7 @@
 import pygame, sys
 
+import myInputs
+
 pygame.init()
 
 size = width, height = 640, 640
@@ -15,9 +17,7 @@ lastDrawTime = 0
 justJumped = 0
 
 while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-
+    
     elapsed = pygame.time.get_ticks()-lastDrawTime
     if elapsed < max_render_time:
         pygame.time.wait(max_render_time-elapsed) 
@@ -68,11 +68,16 @@ while True:
 
     screen.fill(black)
     screen.blit(ball, ballrect)
+   
+
     if justJumped > 0 :
          screen.blit(ball,ghost)
          ghost = ghost.move(speed)
 
     pygame.display.flip()
+    key = myInputs.getDirection()
+    if key :
+        print(key)
     lastDrawTime = pygame.time.get_ticks()
 
 #player = pygame.Rect(10,10,10,10)
