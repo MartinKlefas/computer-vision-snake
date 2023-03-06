@@ -8,7 +8,7 @@ def getDirection():
     for event in pygame.event.get():
        
        if event.type == pygame.QUIT:
-           print("Called quit properly?")
+           #print("Called quit properly?")
            sys.exit()
        elif event.type == 32787:
            print("Alternate quit call")
