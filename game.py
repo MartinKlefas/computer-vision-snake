@@ -1,17 +1,18 @@
 import pygame, sys
 
-import myInputs, movement
+import myInputs, movement, settings
 
 pygame.init()
 
 size = width, height = 640, 640
 speed = [2, 0]
 black = 0, 0, 0
-max_render_time = 10 # makes sure we don't update more than once ever 5ms - seems to be about a decent moving speed.
+max_render_time = settings.max_render_time
+images_folder = "./images/"
 
 screen = pygame.display.set_mode(size)
 
-ball = pygame.image.load("head.gif")
+ball = pygame.image.load(images_folder + "right_head.png")
 ballrect = ball.get_rect()
 ghost = ball.get_rect()
 lastDrawTime = 0
@@ -21,6 +22,8 @@ while True:
     newSpeed = myInputs.getDirection()
     if newSpeed:
        # print(newSpeed)
+        imagePrefix = movement.getFacing(newSpeed)
+        ball = pygame.image.load(images_folder + imagePrefix.lower() + "_head.png")
         speed = newSpeed
         
     elapsed = pygame.time.get_ticks()-lastDrawTime

@@ -1,3 +1,9 @@
+import settings
+import sys
+
+scalar_speed = settings.scalar_speed
+Directions = {"Left": [-1*scalar_speed,0], "Right": [scalar_speed,0], "Up":[0,-1*scalar_speed], "Down": [0,scalar_speed]}
+
 def edges(width,height,ballrect,ghost,justJumped):
     if ballrect.left < 0 - justJumped:
         #ghost =  ball.get_rect()
@@ -36,3 +42,8 @@ def edges(width,height,ballrect,ghost,justJumped):
             justJumped = 0
 
     return ghost, justJumped
+
+def getFacing(movementDirection):
+     for thisDirection in Directions:
+          if movementDirection == Directions[thisDirection]:
+              return thisDirection
