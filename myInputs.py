@@ -6,7 +6,16 @@ Directions = {"Left": [-1*scalar_speed,0], "Right": [scalar_speed,0], "Up":[0,-1
 
 def getDirection():
     for event in pygame.event.get():
-       if event.type == pygame.KEYDOWN:
+       
+       if event.type == pygame.QUIT:
+           print("Called quit properly?")
+           sys.exit()
+       elif event.type == 32787:
+           print("Alternate quit call")
+           sys.exit
+       
+       
+       elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 return Directions["Left"]
             elif event.key == pygame.K_RIGHT:
@@ -27,8 +36,6 @@ def getDirection():
                 sys.exit()
             else:
                 return ""
-       elif event.type == pygame.QUIT:
-           sys.exit()
        else:
            return ""
 

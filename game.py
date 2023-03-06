@@ -17,7 +17,10 @@ lastDrawTime = 0
 justJumped = 0
 
 while True:
-    
+    key = myInputs.getDirection()
+    if key :
+        print(key)
+        
     elapsed = pygame.time.get_ticks()-lastDrawTime
     if elapsed < max_render_time:
         pygame.time.wait(max_render_time-elapsed) 
@@ -75,9 +78,7 @@ while True:
          ghost = ghost.move(speed)
 
     pygame.display.flip()
-    key = myInputs.getDirection()
-    if key :
-        print(key)
+    
     lastDrawTime = pygame.time.get_ticks()
 
 #player = pygame.Rect(10,10,10,10)
