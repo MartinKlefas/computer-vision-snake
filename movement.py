@@ -4,41 +4,41 @@ import sys
 scalar_speed = settings.scalar_speed
 Directions = {"Left": [-1*scalar_speed,0], "Right": [scalar_speed,0], "Up":[0,-1*scalar_speed], "Down": [0,scalar_speed]}
 
-def edges(width,height,ballrect,ghost,justJumped):
-    if ballrect.left < 0 - justJumped:
-        #ghost =  ball.get_rect()
-        ghost.top = ballrect.top
-        ghost.left = ballrect.left
+def edges(width,height,headrect,ghost,justJumped):
+    if headrect.left < 0 - justJumped:
+        #ghost =  head.get_rect()
+        ghost.top = headrect.top
+        ghost.left = headrect.left
 
-        ballrect.left = width + ballrect.left
-        justJumped = ballrect.width
+        headrect.left = width + headrect.left
+        justJumped = headrect.width
 
-    if ballrect.right > width + justJumped:
-       # ghost =  ball.get_rect()
-        ghost.top = ballrect.top
-        ghost.left = ballrect.left
+    if headrect.right > width + justJumped:
+       # ghost =  head.get_rect()
+        ghost.top = headrect.top
+        ghost.left = headrect.left
 
-        ballrect.right = ballrect.right - width
-        justJumped = ballrect.width
+        headrect.right = headrect.right - width
+        justJumped = headrect.width
 
 
-    if ballrect.top <0 - justJumped:
-       # ghost =  ball.get_rect()
-        ghost.top = ballrect.top
-        ghost.left = ballrect.left
+    if headrect.top <0 - justJumped:
+       # ghost =  head.get_rect()
+        ghost.top = headrect.top
+        ghost.left = headrect.left
 
-        ballrect.top = height +  ballrect.top
-        justJumped = ballrect.height
+        headrect.top = height +  headrect.top
+        justJumped = headrect.height
 
-    if ballrect.bottom > height +justJumped:
-      #  ghost =  ball.get_rect()
-        ghost.top = ballrect.top
-        ghost.left = ballrect.left
+    if headrect.bottom > height +justJumped:
+      #  ghost =  head.get_rect()
+        ghost.top = headrect.top
+        ghost.left = headrect.left
 
-        ballrect.bottom = ballrect.bottom - height
-        justJumped = ballrect.height
+        headrect.bottom = headrect.bottom - height
+        justJumped = headrect.height
 
-    if justJumped > 0 and ballrect.left >= 0 and ballrect.top >= 0 and ballrect.right <= width and ballrect.bottom <= height:
+    if justJumped > 0 and headrect.left >= 0 and headrect.top >= 0 and headrect.right <= width and headrect.bottom <= height:
             justJumped = 0
 
     return ghost, justJumped
