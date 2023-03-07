@@ -5,7 +5,7 @@ import myInputs, movement, settings
 pygame.init()
 
 size = width, height = 640, 640
-speed = [2, 0]
+speed = [settings.scalar_speed, 0]
 black = 0, 0, 0
 max_render_time = settings.max_render_time
 images_folder = "./images/"
@@ -29,7 +29,7 @@ lastDrawTime = 0
 justJumped = 0
 bodyJustJumped = 0
 turningPoints = list()
-
+oldspeed = list()
 while True:
     newSpeed = myInputs.getDirection()
   
@@ -37,10 +37,12 @@ while True:
     if newSpeed:
         if newSpeed != speed:
         # print(newSpeed)
+            #print("before ", turningPoints)
             turningPoints.append(headrect.center)
+            #print("after",turningPoints)
             imagePrefix = movement.getFacing(newSpeed)
             head = pygame.image.load(images_folder + imagePrefix.lower() + "_head.png")
-            oldspeed = speed
+            oldspeed.append(speed)
             speed = newSpeed
         
     elapsed = pygame.time.get_ticks()-lastDrawTime
@@ -48,12 +50,18 @@ while True:
         pygame.time.wait(max_render_time-elapsed) 
 
     headrect = headrect.move(speed)
-    if len(turningPoints) == 0:
+    try:
+        if len(turningPoints) == 0:
+            bodyrect = bodyrect.move(speed)
+        else:
+            bodyrect = bodyrect.move(oldspeed[0])
+            #print("before tps : %s speeds : %s" % (turningPoints, oldspeed))
+            turningPoints, oldspeed = movement.checkTurn(bodyrect.centerx,bodyrect.centery, turningPoints,oldspeed)
+            #print("after tps : %s speeds : %s" % (turningPoints, oldspeed))
+    except:
         bodyrect = bodyrect.move(speed)
-    else:
-        bodyrect = bodyrect.move(oldspeed)
 
-    
+
     ghost,justJumped = movement.edges(width,height,headrect,ghost,justJumped)
     bodyGhost,bodyJustJumped = movement.edges(width,height,bodyrect,bodyGhost,bodyJustJumped)
 
