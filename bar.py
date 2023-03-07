@@ -54,7 +54,7 @@ labels = list()
 def initVision():
     global model 
     # Load TFLite model and allocate tensors.
-    model = tf.lite.Interpreter(model_path="model.tflite")
+    model = tf.contrib.lite.Interpreter(model_path="model.tflite")
 
     global input_details, output_details
     # Get input and output tensors.
@@ -71,7 +71,7 @@ def initVision():
         lines = f.readlines()
         global labels
         for line in lines:
-            labels.append(line.rstrip('\n'))
+            labels.append(line.split(" ")[1].rstrip('\n'))
         
     finally:
         f.close()
@@ -91,7 +91,6 @@ def get_prediction():
     strPrediction = "Nothing"   
     while strPrediction == "Nothing" :
         ret, frame = cap.read()
-        frame = cv2.flip(frame,1)
         resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
 
         model.set_tensor(input_details[0]['index'],[resized_frame])
@@ -102,9 +101,6 @@ def get_prediction():
 
         cv2.imshow('Camera Controller', frame)
         strPrediction = labels[np.argmax(prediction)]
-        if cv2.waitKey(4) & 0xFF == ord('q'):
-            break
-        print("You Chose: ", strPrediction)
             
     print("You Chose: ", strPrediction)
     return strPrediction

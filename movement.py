@@ -51,9 +51,6 @@ def getFacing(movementDirection):
 def checkTurn(itemx, itemy ,turningPoints, oldSpeed):
      turningpoint = turningPoints[0]
 
-     #print("item x: %s turn x: %s" % (itemx, turningpoint[0]))
-     #print("item y: %s turn y: %s" % (itemy, turningpoint[1]))
-     #print("absolute y ",abs(itemy - turningpoint[1]))
      
      if abs(itemx - turningpoint[0]) < 2 and abs(itemy - turningpoint[1]) < 2 :
                try:

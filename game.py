@@ -36,12 +36,12 @@ while True:
 
     if newSpeed:
         if newSpeed != speed:
-        # print(newSpeed)
-            #print("before ", turningPoints)
+        
             turningPoints.append(headrect.center)
-            #print("after",turningPoints)
+            
             imagePrefix = movement.getFacing(newSpeed)
             head = pygame.image.load(images_folder + imagePrefix.lower() + "_head.png")
+            
             oldspeed.append(speed)
             speed = newSpeed
         
@@ -55,9 +55,9 @@ while True:
             bodyrect = bodyrect.move(speed)
         else:
             bodyrect = bodyrect.move(oldspeed[0])
-            #print("before tps : %s speeds : %s" % (turningPoints, oldspeed))
+           
             turningPoints, oldspeed = movement.checkTurn(bodyrect.centerx,bodyrect.centery, turningPoints,oldspeed)
-            #print("after tps : %s speeds : %s" % (turningPoints, oldspeed))
+           
     except:
         bodyrect = bodyrect.move(speed)
 
@@ -82,6 +82,6 @@ while True:
     
     lastDrawTime = pygame.time.get_ticks()
 
-#player = pygame.Rect(10,10,10,10)
+
         
     
