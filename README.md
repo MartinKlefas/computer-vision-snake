@@ -20,13 +20,13 @@ The model has been included into the code base and will now also control the sna
 
 The model itself tests fine, but unfortunately doesn't seem to want the snake to go "right" very often.
 
+I've made an alternative implementation of the snake game itself, that more closely matches it's usual implementation. It's very basic graphically at present, but the code allows for a growing snake, scores and "food". This needs a bit more testing, before modularisation to use the vision model can take place.
+
 # To Do
 
- 1. Make sure that the body is following the tail at the right distance
- 2. Retrain the model to make the snake go "Right" when it should do
- 3. Refactor the turning code to allow for multiple body sections to follow one another easily
- 4. Put in a turn rate limiter of some kind
- 5. Implement self-collision
- 6. Put in the "apples" and make the snake able to grow longer.
+ 1. Modularise new snake game code
+ 2. Implement test/validate schema with tensorboard feedback on model training.
+ 3. Retrain the model to make the snake go "Right" when it should do
+
 
 > Written with [StackEdit](https://stackedit.io/).
